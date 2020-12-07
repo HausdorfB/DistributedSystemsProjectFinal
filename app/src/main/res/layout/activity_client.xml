@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/edit_text_background"
+    tools:context=".ClientActivity">
+
+    <view
+        android:id="@+id/YTvid"
+        class="com.google.android.youtube.player.YouTubePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <Button
+        android:id="@+id/btnSync"
+        android:layout_width="110dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="324dp"
+        android:background="@drawable/sync"
+        app:backgroundTint="#FF5722"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMSG"
+        android:layout_width="396dp"
+        android:layout_height="186dp"
+
+        android:gravity="bottom"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:text="G: Hey \n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye\n N: Bye"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.886" />
+
+    <EditText
+        android:id="@+id/etMSG"
+        android:layout_width="290dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="Message..."
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="88dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btnbackground"
+        android:text="Send"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF5722"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etMSG" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
