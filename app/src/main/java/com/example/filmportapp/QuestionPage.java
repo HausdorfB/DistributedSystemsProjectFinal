@@ -88,14 +88,14 @@ public class QuestionPage extends AppCompatActivity {
         Collections.shuffle(questionList);
 
         showNextQuestion();
-
+            
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!answered){
+                if (!answered){ //check if a button is checked
                     if (btn1.isChecked() || btn2.isChecked() || btn3.isChecked()) {
                         checkCorrect();
-                    } else {
+                    } else { //if no button is clicked, send message
                         Toast.makeText(getApplicationContext(),"Choose an answer before Submitting", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -113,14 +113,14 @@ public class QuestionPage extends AppCompatActivity {
 
         if (Counter < totalQuestions) {
             currentQuestion = questionList.get(Counter);
-
+            //using questions from SQL Database, fill each question in relation to the counter value
             question.setText(currentQuestion.getQuestion());
             btn1.setText(currentQuestion.getOption1());
             btn2.setText(currentQuestion.getOption2());
             btn3.setText(currentQuestion.getOption3());
-
+    
             Counter++;
-            questionNumber.setText("Question #: " + Counter + "/" + totalQuestions);
+            questionNumber.setText("Question #: " + Counter + "/" + totalQuestions); // initialize question counter
             answered = false;
             nextPage.setText("Confirm");
 
@@ -135,14 +135,14 @@ public class QuestionPage extends AppCompatActivity {
     private void startCountdownTimer(){
         countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished) { //on tick method increments the timer based on the devices internal clock
                 timeLeft = millisUntilFinished;
                 updateTimer();
             }
 
             @Override
             public void onFinish() {
-                timeLeft = 0;
+                timeLeft = 0; //re-initialize the timer for next question
                 updateTimer();
                 checkCorrect();
             }
@@ -150,13 +150,14 @@ public class QuestionPage extends AppCompatActivity {
     }
 
     private void updateTimer(){
+        //initialize second and minute variables
         int minute = (int) (timeLeft/1000)/60;
         int second = (int) (timeLeft/1000)%60;
-
+        // use the Locale function to display the timer in a proper order
         String time = String.format(Locale.getDefault(), "%02d:%02d", minute, second);
 
         timer.setText(time);
-
+        //switch the timer color to red once a certain time hits
         if (timeLeft < 10000) {
             timer.setTextColor(Color.RED);
         } else {
@@ -169,24 +170,25 @@ public class QuestionPage extends AppCompatActivity {
 
         countDownTimer.cancel();
         RadioButton btnSelected = findViewById(radioGroup.getCheckedRadioButtonId());
-
+        //recieve the correct index of radio button clicked
         int ans = radioGroup.indexOfChild(btnSelected) + 1;
         System.out.println("Button selected: " + ans);
-        if (ans == currentQuestion.getAnswer()) {
+        if (ans == currentQuestion.getAnswer()) { //if correct, increment the score variable
             score++;
             currentScore.setText("Score: " + score);
             Constants.KEY_MYSCORE = score;
         }
-
+        
         showSolution();
     }
 
-    private void showSolution(){
+    private void showSolution(){ 
+        //initialize the buttons as a red color for consistency
         btn1.setTextColor(Color.RED);
         btn2.setTextColor(Color.RED);
         btn3.setTextColor(Color.RED);
 
-        switch (currentQuestion.getAnswer()) {
+        switch (currentQuestion.getAnswer()) { //display the answer and change button color accordingly 
             case 1:
                 btn1.setTextColor(Color.GREEN);
                 question.setText("Answer 1 is Correct!");
@@ -200,7 +202,7 @@ public class QuestionPage extends AppCompatActivity {
                 question.setText("Answer 3 is Correct!");
                 break;
         }
-        if (Counter < totalQuestions){
+        if (Counter < totalQuestions){ //decide whether to show the next question or to finish the quiz
             nextPage.setText("Next Question");
         } else {
             nextPage.setText("Finish Quiz");
@@ -208,7 +210,7 @@ public class QuestionPage extends AppCompatActivity {
     }
 
     private void finishQuiz(){
-
+        //pass the connection type and score to the next activity
         Intent intent = new Intent(this,QuizDoneActivity.class);
         intent.putExtra("CONN_TYPE", connType);
         intent.putExtra("SCORE", score);
